@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Employee Salary Calculator</title>
+
+  <!-- React CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f6f8;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      width: 400px;
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    input {
+      width: 80%;
+      padding: 8px;
+      margin: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px;
+      margin: 5px;
+      width: 85%;
+      font-size: 16px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2980b9;
+    }
+
+    p {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+function App() {
+  const [basic, setBasic] = React.useState(0);
+  const [total, setTotal] = React.useState(0);
+  const [grade, setGrade] = React.useState("");
+  const [bonus, setBonus] = React.useState(0);
+
+  // a) Salary calculation
+  const calculateSalary = () => {
+    const da = 0.30 * basic;
+    const hra = 0.10 * basic;
+    const special = 0.05 * basic;
+    const totalSalary = basic + da + hra + special;
+    setTotal(totalSalary);
+  };
+
+  // b) Grade calculation
+  const checkGrade = () => {
+    if (total >= 10000 && total <= 20000)
+      setGrade("A");
+    else if (total >= 20001 && total <= 30000)
+      setGrade("B");
+    else if (total >= 30001 && total <= 40000)
+      setGrade("C");
+    else if (total > 40000)
+      setGrade("EXC");
+  };
+
+  // c) Bonus calculation
+  const checkBonus = () => {
+    let b = 0;
+    if (grade === "A") b = 0.15 * basic;
+    else if (grade === "B") b = 0.12 * basic;
+    else if (grade === "C") b = 0.06 * basic;
+    else if (grade === "EXC") b = 0.05 * basic;
+    setBonus(b);
+  };
+
+  return (
+    <div className="card">
+      <h2>Employee Salary Calculator</h2>
+
+      <input
+        type="number"
+        placeholder="Enter Basic Pay"
+        onChange={(e) => setBasic(Number(e.target.value))}
+      />
+
+      <button onClick={calculateSalary}>Calculate Total Salary</button>
+      <p>Total Salary: ₹ {total}</p>
+
+      <button onClick={checkGrade}>Check Grade</button>
+      <p>Grade: {grade}</p>
+
+      <button onClick={checkBonus}>Check Bonus</button>
+      <p>Bonus: ₹ {bonus}</p>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
