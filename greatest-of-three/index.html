@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Greatest of Three</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+function App() {
+  const [a, setA] = React.useState("");
+  const [b, setB] = React.useState("");
+  const [c, setC] = React.useState("");
+
+  return (
+    <div>
+      <h2>Greatest of Three Numbers</h2>
+      <input placeholder="A" onChange={e => setA(e.target.value)} />
+      <input placeholder="B" onChange={e => setB(e.target.value)} />
+      <input placeholder="C" onChange={e => setC(e.target.value)} />
+      <p>
+        {a && b && c && `Greatest = ${Math.max(a, b, c)}`}
+      </p>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>

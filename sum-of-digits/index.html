@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sum of Digits</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+
+<script type="text/babel">
+function App() {
+  const [n, setN] = React.useState("");
+
+  const sumDigits = (num) =>
+    num.toString().split("").reduce((a, b) => a + Number(b), 0);
+
+  return (
+    <div>
+      <h2>Sum of Digits</h2>
+      <input type="number" onChange={e => setN(e.target.value)} />
+      <p>{n && `Sum = ${sumDigits(n)}`}</p>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+</script>
+</body>
+</html>
